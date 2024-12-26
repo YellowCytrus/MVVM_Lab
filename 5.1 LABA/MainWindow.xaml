@@ -1,0 +1,93 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_5._1_LABA"
+        xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" x:Class="_5._1_LABA.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="493" Width="800"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="0.3*" />
+        </Grid.RowDefinitions>
+
+        <!-- Таблица со студентами -->
+        <DataGrid Grid.Row="0" Grid.Column="0" 
+                  ItemsSource="{Binding Students}"
+                  SelectedItem="{Binding CurrentStudent}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Group" Binding="{Binding Group}" />
+                <DataGridTextColumn Header="Speciality" Binding="{Binding Speciality}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="0" Grid.Column="1"
+              Background="LightGray">
+            
+
+            <!-- Здесь будет отображаться гистограмма -->
+        </Grid>
+
+        <!-- Область для создания/редактирования студента -->
+        <Grid Grid.Row="1" Grid.Column="0"
+              Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Name:" Margin="5" Grid.Column="0"/>
+                <TextBox Margin="5" Text="{Binding StudentInEditWindow.Name}" Grid.Column="1"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Group:" Margin="5"  />
+                <TextBox Grid.Column="1" Margin="5" Text="{Binding StudentInEditWindow.Group}" />
+            </Grid>
+
+            <Grid Grid.Row="2" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Speciality:" Margin="5" Grid.Row="2" />
+                <TextBox Grid.Column="1" Margin="5" Grid.Row="2" Text="{Binding StudentInEditWindow.Speciality}" />
+            </Grid>
+
+            <Grid Grid.Row="3" Background="White">
+                <Button Grid.Column="1" Margin="5" Content="Save Changes" Command="{Binding SaveChangesCommand}" Grid.Row="3"/>
+            </Grid>
+        </Grid>
+
+        <!-- Кнопки для добавления и удаления студентов -->
+        <StackPanel Grid.Row="1" Grid.Column="1"
+                    Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="5" Content="Add" Command="{Binding AddNewStudentCommand}" />
+            <Button Margin="5" Content="Delete" Command="{Binding DeleteStudentCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>
